@@ -6,6 +6,7 @@ import com.devsu.clientservice.domain.model.Client;
 import com.devsu.clientservice.domain.repository.ClientRepository;
 import com.devsu.clientservice.exception.ClientNotFoundException;
 import com.devsu.clientservice.exception.ClientAlreadyExistsException;
+import com.devsu.clientservice.infrastructure.messaging.RabbitMQSender;
 import com.devsu.clientservice.infrastructure.mapper.ClientMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
+    private final RabbitMQSender rabbitMQSender;
 
     @Override
     @Transactional(readOnly = true)
@@ -56,7 +58,9 @@ public class ClientServiceImpl implements ClientService {
                 });
         Client client = clientMapper.toEntity(clientDto);
         Client savedClient = clientRepository.save(client);
-        return clientMapper.toDto(savedClient);
+        ClientDto clientDtoResponse = clientMapper.toDto(savedClient);
+        rabbitMQSender.send(clientDto);
+        return clientDtoResponse;
     }
 
     @Override
