@@ -1,4 +1,4 @@
-package com.devsu.clientservice.api.dto;
+package com.devsu.clientservice.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

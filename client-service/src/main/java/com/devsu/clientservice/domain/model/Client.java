@@ -4,20 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "clientId")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Client {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clientId;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private Person person;
+@ToString
+public class Client  extends Person {
 
     private String password;
     private boolean status;

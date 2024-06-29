@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface JpaClientRepository extends JpaRepository<Client, Long>, ClientRepository {
-    Optional<Client> findByPersonIdentification(String identification);
+    Optional<Client> findByIdentification(String identification);
 }

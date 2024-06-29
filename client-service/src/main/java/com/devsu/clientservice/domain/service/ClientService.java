@@ -1,6 +1,8 @@
 package com.devsu.clientservice.domain.service;
 
 import com.devsu.clientservice.api.dto.ClientDto;
+import com.devsu.clientservice.api.dto.UpdateClientDto;
+
 import java.util.List;
 
 public interface ClientService {
@@ -9,6 +11,6 @@ public interface ClientService {
     ClientDto getClientById(Long id);
     ClientDto getClientByIdentification(String identification);
     ClientDto createClient(ClientDto clientDto);
-    ClientDto updateClient(Long id, ClientDto clientDto);
+    ClientDto updateClient(Long id, UpdateClientDto clientDto);
     void deleteClient(Long id);
 }

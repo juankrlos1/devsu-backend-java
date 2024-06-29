@@ -1,6 +1,7 @@
 package com.devsu.clientservice.api.controller;
 
-import com.devsu.clientservice.api.dto.ApiResponse;
+import com.devsu.clientservice.api.dto.UpdateClientDto;
+import com.devsu.clientservice.common.dto.ApiResponse;
 import com.devsu.clientservice.api.dto.ClientDto;
 import com.devsu.clientservice.domain.service.ClientService;
 import jakarta.validation.Valid;
@@ -47,8 +48,8 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<ClientDto>> updateClient(@PathVariable Long id, @Valid @RequestBody ClientDto clientDto) {
-        ClientDto updatedClient = clientService.updateClient(id, clientDto);
+    public ResponseEntity<ApiResponse<ClientDto>> updateClient(@PathVariable Long id, @Valid @RequestBody UpdateClientDto updateClientDto) {
+        ClientDto updatedClient = clientService.updateClient(id, updateClientDto);
         return ResponseEntity.ok(createSuccessResponse("Client updated successfully", updatedClient));
     }
 

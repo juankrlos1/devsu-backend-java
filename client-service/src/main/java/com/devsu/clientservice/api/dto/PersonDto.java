@@ -1,9 +1,11 @@
 package com.devsu.clientservice.api.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class PersonDto {
     private Long personId;
 
