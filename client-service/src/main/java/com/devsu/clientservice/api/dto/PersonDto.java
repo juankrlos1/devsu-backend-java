@@ -3,9 +3,11 @@ package com.devsu.clientservice.api.dto;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class PersonDto {
     private Long personId;
 

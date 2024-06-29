@@ -7,6 +7,7 @@ import com.devsu.clientservice.domain.service.ClientService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/clients")
 @RequiredArgsConstructor
 @Validated
+@Slf4j
 public class ClientController {
 
     private final ClientService clientService;
@@ -32,6 +34,7 @@ public class ClientController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<ClientDto>> getClientById(@PathVariable Long id) {
         ClientDto client = clientService.getClientById(id);
+        log.info("Client retrieved successfully: {}", client);
         return ResponseEntity.ok(createSuccessResponse("Client retrieved successfully", client));
     }
 
