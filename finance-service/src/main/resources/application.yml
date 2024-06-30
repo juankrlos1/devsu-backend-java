@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    url: jdbc:mysql://localhost:3306/devsu_test
+    url: jdbc:mysql://mysql:3306/devsu_test
     password: 1234
   jpa:
     properties:
@@ -18,7 +18,7 @@ spring:
       spec: maximumSize=500,expireAfterAccess=600s
 
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest
@@ -29,7 +29,7 @@ server:
     context-path: /finance-service
 
 client-service:
-  url: http://localhost:8080/client-service
+  url: http://client-service:8080/client-service
 
 feign:
   client:
@@ -49,3 +49,8 @@ management:
     web:
       exposure:
         include: '*'
+
+rabbitmq:
+  exchange: client.exchange
+  routingKey: client.routingKey
+  queue: client.queue

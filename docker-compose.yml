@@ -3,19 +3,21 @@ version: "3.8"
 services:
   mysql:
     image: mysql:8.0
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: devsu_test
     ports:
       - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
     networks:
       - devsu-network
 
   rabbitmq:
     image: rabbitmq:3-management
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -23,31 +25,43 @@ services:
       - devsu-network
 
   client-service:
-    image: client-service:latest
     build:
       context: ./client-service
       dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devsu_test
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_RABBITMQ_HOST: rabbitmq
     ports:
       - "8080:8080"
-    networks:
-      - devsu-network
     depends_on:
       - mysql
       - rabbitmq
+    networks:
+      - devsu-network
 
   finance-service:
-    image: finance-service:latest
     build:
       context: ./finance-service
       dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devsu_test
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_RABBITMQ_HOST: rabbitmq
+      CLIENT_SERVICE_URL: http://client-service:8080/client-service
     ports:
       - "8090:8090"
-    networks:
-      - devsu-network
     depends_on:
       - mysql
       - rabbitmq
+      - client-service
+    networks:
+      - devsu-network
 
 networks:
   devsu-network:
-    driver: bridge
+
+volumes:
+  mysql-data:
