@@ -2,7 +2,7 @@ package com.devsu.clientservice;
 
 import com.intuit.karate.junit5.Karate;
 
-class ClientServiceIntegrationTest {
+public class ClientServiceIntegrationTest {
 
     @Karate.Test
     Karate testAll() {
