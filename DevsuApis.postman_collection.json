@@ -1,0 +1,434 @@
+{
+	"info": {
+		"_postman_id": "9936decd-d6a7-47fa-82a4-94edbfeaed91",
+		"name": "DevsuApis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1347023"
+	},
+	"item": [
+		{
+			"name": "client-service",
+			"item": [
+				{
+					"name": "get-clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER}}:{{PORT_CLIENT}}/client-service/api/{{RESOURCE_CLIENTS}}",
+							"protocol": "http",
+							"host": [
+								"{{SERVER}}"
+							],
+							"port": "{{PORT_CLIENT}}",
+							"path": [
+								"client-service",
+								"api",
+								"{{RESOURCE_CLIENTS}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-clients-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER}}:{{PORT_CLIENT}}/client-service/api/{{RESOURCE_CLIENTS}}/2",
+							"protocol": "http",
+							"host": [
+								"{{SERVER}}"
+							],
+							"port": "{{PORT_CLIENT}}",
+							"path": [
+								"client-service",
+								"api",
+								"{{RESOURCE_CLIENTS}}",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Diego Alejandro\",\n    \"gender\": \"M\",\n    \"age\": 18,\n    \"identification\": \"1723456781\",\n    \"address\": \"Otavalo sn y principal\",\n    \"phone\": \"0982547850\",\n    \"password\": \"1234\",\n    \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SERVER}}:{{PORT_CLIENT}}/client-service/api/{{RESOURCE_CLIENTS}}",
+							"protocol": "http",
+							"host": [
+								"{{SERVER}}"
+							],
+							"port": "{{PORT_CLIENT}}",
+							"path": [
+								"client-service",
+								"api",
+								"{{RESOURCE_CLIENTS}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-client",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Diego De La Cruz\",\n    \"status\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{SERVER}}:{{PORT_CLIENT}}/client-service/api/{{RESOURCE_CLIENTS}}/6",
+							"protocol": "http",
+							"host": [
+								"{{SERVER}}"
+							],
+							"port": "{{PORT_CLIENT}}",
+							"path": [
+								"client-service",
+								"api",
+								"{{RESOURCE_CLIENTS}}",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove-client",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{SERVER}}:{{PORT_CLIENT}}/client-service/api/{{RESOURCE_CLIENTS}}/6",
+							"protocol": "http",
+							"host": [
+								"{{SERVER}}"
+							],
+							"port": "{{PORT_CLIENT}}",
+							"path": [
+								"client-service",
+								"api",
+								"{{RESOURCE_CLIENTS}}",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "finance-service",
+			"item": [
+				{
+					"name": "transactions",
+					"item": [
+						{
+							"name": "get-transactions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_TRANSACTIONS}}/account/478758",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_TRANSACTIONS}}",
+										"account",
+										"478758"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "hacer-deposito",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transactionType\": \"Deposito\",\n    \"amount\": 20.0,\n    \"accountNumber\": \"478758\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_TRANSACTIONS}}",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_TRANSACTIONS}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "hacer-retiro",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transactionType\": \"Retiro\",\n    \"amount\": 30.0,\n    \"accountNumber\": \"478758\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_TRANSACTIONS}}",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_TRANSACTIONS}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "accounts",
+					"item": [
+						{
+							"name": "get-accounts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_ACCOUNTS}}",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_ACCOUNTS}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-account",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountNumber\": \"378758\",\n    \"accountType\": \"Corriente\",\n    \"initialBalance\": 5000.0,\n    \"status\": true,\n    \"clientId\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_ACCOUNTS}}",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_ACCOUNTS}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-account-by-id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_ACCOUNTS}}/1",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_ACCOUNTS}}",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-account-by-accNumber",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_ACCOUNTS}}/account-number/478758",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_ACCOUNTS}}",
+										"account-number",
+										"478758"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-account-by-clientId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_ACCOUNTS}}/client/2",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_ACCOUNTS}}",
+										"client",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "reports",
+					"item": [
+						{
+							"name": "report-by-client",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_REPORTS}}?clientId=2&startDate=2024-01-01&endDate=2024-07-01",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_REPORTS}}"
+									],
+									"query": [
+										{
+											"key": "clientId",
+											"value": "2"
+										},
+										{
+											"key": "startDate",
+											"value": "2024-01-01"
+										},
+										{
+											"key": "endDate",
+											"value": "2024-07-01"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "repor-by-account",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{SERVER}}:{{PORT_FINANCE}}/finance-service/api/{{RESOURCE_REPORTS}}/account?accountNumber=478758&startDate=2024-01-01&endDate=2024-07-01",
+									"protocol": "http",
+									"host": [
+										"{{SERVER}}"
+									],
+									"port": "{{PORT_FINANCE}}",
+									"path": [
+										"finance-service",
+										"api",
+										"{{RESOURCE_REPORTS}}",
+										"account"
+									],
+									"query": [
+										{
+											"key": "accountNumber",
+											"value": "478758"
+										},
+										{
+											"key": "startDate",
+											"value": "2024-01-01"
+										},
+										{
+											"key": "endDate",
+											"value": "2024-07-01"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
