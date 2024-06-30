@@ -6,6 +6,7 @@ import com.devsu.financeservice.domain.model.Account;
 import com.devsu.financeservice.domain.model.Transaction;
 import com.devsu.financeservice.domain.repository.AccountRepository;
 import com.devsu.financeservice.domain.repository.TransactionRepository;
+import com.devsu.financeservice.infrastructure.cache.ClientCache;
 import com.devsu.financeservice.infrastructure.external.ClientServiceClient;
 import com.devsu.financeservice.exception.AccountNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class ReportService {
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
     private final ClientServiceClient clientServiceClient;
+    private final ClientCache clientCache;
 
     @Transactional(readOnly = true)
     public List<AccountStatementDto> getAccountStatements(Long clientId, LocalDateTime startDate, LocalDateTime endDate) {
@@ -46,9 +48,13 @@ public class ReportService {
     }
 
     private ClientDto getClientById(Long clientId) {
-        ApiResponse<ClientDto> clientResponse = clientServiceClient.getClientById(clientId);
-        ClientDto client = clientResponse.getData();
-        log.info("Client response: {}", client);
+        ClientDto client = clientCache.getClientById(clientId);
+        if (client == null) {
+            ApiResponse<ClientDto> clientResponse = clientServiceClient.getClientById(clientId);
+            client = clientResponse.getData();
+            log.info("Client response: {}", client);
+            clientCache.updateClient(client); // Update cache with fresh data
+        }
         return client;
     }
 

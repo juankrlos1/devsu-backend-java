@@ -7,12 +7,16 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "clientId")
+@Table(name = "client")
+@PrimaryKeyJoinColumn(name = "person_id")
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class Client  extends Person {
+
+    @Column(name = "client_id", unique = true, nullable = false)
+    private Long clientId;
 
     private String password;
     private boolean status;

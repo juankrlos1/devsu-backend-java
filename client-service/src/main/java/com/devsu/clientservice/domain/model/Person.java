@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
+@Table(name = "person")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
@@ -16,7 +17,7 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "person_id")
     private Long personId;
 
     private String name;

@@ -6,7 +6,6 @@ import com.devsu.clientservice.domain.model.Client;
 import com.devsu.clientservice.domain.repository.ClientRepository;
 import com.devsu.clientservice.exception.ClientNotFoundException;
 import com.devsu.clientservice.exception.ClientAlreadyExistsException;
-import com.devsu.clientservice.infrastructure.messaging.RabbitMQSender;
 import com.devsu.clientservice.infrastructure.mapper.ClientMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,6 @@ public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
-    private final RabbitMQSender rabbitMQSender;
 
     @Override
     @Transactional(readOnly = true)
@@ -36,7 +34,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional(readOnly = true)
     public ClientDto getClientById(Long id) {
-        return clientRepository.findById(id)
+        return clientRepository.findByClientId(id)
                 .map(clientMapper::toDto)
                 .orElseThrow(() -> new ClientNotFoundException("Client not found with id: " + id));
     }
@@ -58,21 +56,19 @@ public class ClientServiceImpl implements ClientService {
                 });
         Client client = clientMapper.toEntity(clientDto);
         Client savedClient = clientRepository.save(client);
-        ClientDto clientDtoResponse = clientMapper.toDto(savedClient);
-        rabbitMQSender.send(clientDto);
-        return clientDtoResponse;
+        return clientMapper.toDto(savedClient);
     }
 
     @Override
     @Transactional
     public ClientDto updateClient(Long id, UpdateClientDto updateClientDto) {
-        Client existingClient = clientRepository.findById(id)
+        Client existingClient = clientRepository.findByClientId(id)
                 .orElseThrow(() -> new ClientNotFoundException("Client not found with id: " + id));
 
         log.info("before update existingClient map: {}", existingClient.toString());
 
         updateClientFields(existingClient, updateClientDto);
-        log.info("existingClient map: {}", existingClient.toString());
+        log.info("existingClient map: {}", existingClient);
         Client savedClient = clientRepository.save(existingClient);
         return clientMapper.toDto(savedClient);
     }
@@ -80,10 +76,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     @Transactional
     public void deleteClient(Long id) {
-        if (!clientRepository.existsById(id)) {
+        if (!clientRepository.existsByClientId(id)) {
             throw new ClientNotFoundException("Client not found with id: " + id);
         }
-        clientRepository.deleteById(id);
+        clientRepository.deleteByClientId(id);
     }
 
     private void updateClientFields(Client existingClient, UpdateClientDto updateClientDto) {

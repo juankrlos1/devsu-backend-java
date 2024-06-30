@@ -30,3 +30,22 @@ server:
 
 client-service:
   url: http://localhost:8080/client-service
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG
+    com.devsu: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -29,5 +29,6 @@ server:
     context-path: /client-service
 
 rabbitmq:
-  exchange: clientExchange
-  routingKey: clientRoutingKey
+  exchange: client.exchange
+  routingKey: client.routingKey
+  queue: client.queue

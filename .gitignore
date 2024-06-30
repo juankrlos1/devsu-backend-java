@@ -1,0 +1,31 @@
+# Archivos generados por Maven
+target/
+*.iml
+*.log
+pom.xml.backup
+
+# Archivos de configuración de IntelliJ IDEA
+*.idea/
+workspace.xml
+
+# Archivos temporales
+build/
+out/
+
+# Archivos de base de datos (si no se usan en el repositorio)
+db/
+*.sql
+
+# Directorios de caché
+.m2/
+~
+
+# Archivos específicos de IDE (puedes agregar más según sea necesario)
+*.classpath
+*.project
+*.settings
+*.iml
+
+# Archivos de prueba (si no se incluyen en el repositorio)
+src/test/resources/application.properties
+src/test/java/**/*.properties

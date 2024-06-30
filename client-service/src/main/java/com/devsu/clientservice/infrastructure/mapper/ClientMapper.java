@@ -9,13 +9,15 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
-
-    @Mapping(target = "clientId", source = "personId")
+    @Mapping(target = "clientId", source = "clientId")
+    @Mapping(target = "personId", source = "personId")
     ClientDto toDto(Client client);
 
-    @Mapping(target = "personId", source = "clientId")
+    @Mapping(target = "clientId", source = "clientId")
+    @Mapping(target = "personId", source = "personId")
     Client toEntity(ClientDto clientDto);
 
+    @Mapping(target = "clientId", ignore = true)
     @Mapping(target = "personId", ignore = true)
     void updateEntityFromDto(UpdateClientDto updateClientDto, @MappingTarget Client client);
 }
